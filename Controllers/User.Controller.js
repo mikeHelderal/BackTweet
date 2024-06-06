@@ -69,3 +69,7 @@ const deleteUser = async (req, res, next) => {
         res.status(400).json("erreur lors de la suppréssion");
     }
 }
+
+export {
+    signup , signIn, getAll, getOne, updateUser, deleteUser
+}
