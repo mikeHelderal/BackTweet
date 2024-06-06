@@ -1,11 +1,14 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-
+import modelUser from "../Models/user.Model.js"
+import dotenv from "dotenv";
+import userModel from "../Models/user.Model.js";
+dotenv.config();
 
 const signup = async (req, res, next) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password,10);
-        await modelUser.create({...req.body, password: hashedPassword});
+        await userModel.create({...req.body, password: hashedPassword});
         res.status(201).json("User has been created!");
         
     } catch (error) {
@@ -17,7 +20,7 @@ const signup = async (req, res, next) => {
 
 const signIn = async (req, res, next) => {
     try {
-        const user = await modelUser.findOne({email: req.body.email});
+        const user = await userModel.findOne({email: req.body.email});
         const pswBdd = await  bcrypt.compare(req.body.password, user.password);
         const token = jwt.sign({id: user._id}, env.token, {expiresIn: "24h"});
         const {password, ...other} = user._doc;
@@ -34,7 +37,7 @@ const signIn = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
     try {
-        const users = await modelUser.findAll();
+        const users = await userModel.findAll();
     res.status(200).json(users);
     } catch (error) {
         res.status(400).json("echec");
@@ -44,7 +47,7 @@ const getAll = async (req, res, next) => {
 }
 const getOne = async (req, res, next) =>{
     try {
-        const user = await modelUser.findById(req.params.id);
+        const user = await userModel.findById(req.params.id);
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json("echec");
@@ -52,10 +55,17 @@ const getOne = async (req, res, next) =>{
 }
 const updateUser = async (req, res, next) => {
     try {
-        const result = await modelUser.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const result = await userModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json("erreur lors de la modification")
     }
 }
-const deleteUser = async (req, res, next) => {}
+const deleteUser = async (req, res, next) => {
+    try {
+        await userModel.findByIdAndDelete(req.params.id);
+        res.status(200).json("supprimé avec succès");
+    } catch (error) {
+        res.status(400).json("erreur lors de la suppréssion");
+    }
+}
