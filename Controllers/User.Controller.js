@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import modelUser from "../Models/user.Model.js"
 import dotenv from "dotenv";
 import userModel from "../Models/user.Model.js";
+import {io} from "../Services/Socket.js"
+
 dotenv.config();
 
 const signup = async (req, res, next) => {
@@ -56,6 +58,7 @@ const getOne = async (req, res, next) =>{
 const updateUser = async (req, res, next) => {
     try {
         const result = await userModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        io.emit('updateUser', result);
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json("erreur lors de la modification")
