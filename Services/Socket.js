@@ -16,11 +16,18 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
     // ...
-    console.log("user connected");   
+    console.log("Socket connected");  
+    
+    socket.on("disconnect", (error) => {
+        console.log("Socket disconnected")
+    })
+
+    socket.on("error", (error) => {
+        console.log("Socket error : ", error)
+    });
 });
 
-io.on("disconnect", (socket) => {
-    console.log("user disconnected");
-});
+
+
 
 export {server, io};

@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import connectDB from "./config/db.js"
 
-
+import routerUser from './Routes/User.Route.js'
 import routerLike from './Routes/Like.Route.js'
 import routerTweet from './Routes/Tweet.Route.js'
 
@@ -19,6 +19,7 @@ app.use(cors());
 connectDB(ENV.mongo)
 
 app.use("/api/like", routerLike);
-app.use("/api/tweet", routerTweet)
+app.use("/api/tweet", routerTweet);
+app.use("/api/users", routerUser);
 
 export default app ;

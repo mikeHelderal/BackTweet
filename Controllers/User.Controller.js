@@ -4,7 +4,7 @@ import modelUser from "../Models/user.Model.js"
 import dotenv from "dotenv";
 import userModel from "../Models/user.Model.js";
 import {io} from "../Services/Socket.js"
-import { env } from './config.js'
+import { env } from '../config.js'
 
 dotenv.config();
 
