@@ -1,12 +1,9 @@
 import express from 'express'
-import { ENV } from './config/env.js'
+import { env } from './config.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import connectDB from "./config/db.js"
 
-
-import routerLike from './Routes/Like.Route.js'
-import routerTweet from './Routes/Tweet.Route.js'
+import routerUser from './Routes/User.Route.js'
 
 const app = express();
 
@@ -15,10 +12,6 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors());
 
-//bdd
-connectDB(ENV.mongo)
-
-app.use("/api/like", routerLike);
-app.use("/api/tweet", routerTweet)
+app.use("/api/user", routerUser);
 
 export default app ;
