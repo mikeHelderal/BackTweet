@@ -17,6 +17,6 @@ const likeSchema = new mongoose.Schema({
 });
 
 
-tweetSchema.plugin(mongooseUniqueValidator);
+likeSchema.plugin(mongooseUniqueValidator);
 
 export default mongoose.model('Like', likeSchema);
