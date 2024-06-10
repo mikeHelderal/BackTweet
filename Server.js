@@ -1,16 +1,20 @@
-import express from 'express'
-import { env } from './config.js'
-import app from './App.js'
-import {Server} from './Services/Socket.js'
-import http from 'http'
+import app from './app.js';
+import {ENV} from './config/env.js'
+
+//PORT
+
+const PORT = ENV.PORT || 8080;
 
 
+app.use("/api/users", userRoute);
 
-const PORT = env.port || 8080
-
-
-
-
-server.listen(PORT, () => {
+// LISTEN 
+app.listen(PORT, () =>{
     console.log(`Listening at http://localhost:${PORT}`);
 })
+
+
+
+
+
+
