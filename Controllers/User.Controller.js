@@ -4,6 +4,7 @@ import modelUser from "../Models/user.Model.js"
 import dotenv from "dotenv";
 import userModel from "../Models/user.Model.js";
 import {io} from "../Services/Socket.js"
+import { env } from './config.js'
 
 dotenv.config();
 
@@ -29,7 +30,7 @@ const signIn = async (req, res, next) => {
         if(user !== null  && pswBdd ){
              //envoi le jeton (token) JWT sous forme de cookie HTTPOnly
             res.cookie("access_token", token, { httpOnly: true,  }).status(200).json(other);
-                //res.status(200).json("connexion réussie");  
+                res.status(200).json("connexion réussie");  
                 res.end();                  
         }    
     } catch (error) {
