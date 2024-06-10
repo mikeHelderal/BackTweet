@@ -6,6 +6,7 @@ import connectDB from "./config/db.js"
 
 
 import routerLike from './Routes/Like.Route.js'
+import routerTweet from './Routes/Tweet.Route.js'
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(cors());
 connectDB(ENV.mongo)
 
 app.use("/api/like", routerLike);
+app.use("/api/tweet", routerTweet)
 
 export default app ;
