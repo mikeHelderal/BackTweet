@@ -12,6 +12,6 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors());
 
-app.use("/api/user", routerUser);
+app.use('/api/users/', routerUser);
 
-export default app ; 
+export default app ;

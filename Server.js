@@ -1,4 +1,3 @@
-import app from './app.js';
 import {ENV} from './config/env.js'
 import {server} from './Services/Socket.js';
 
