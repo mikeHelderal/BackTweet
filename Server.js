@@ -1,4 +1,4 @@
-import app from './app.js';
+import app from './App.js';
 import {ENV} from './config/env.js'
 
 //PORT

@@ -7,6 +7,8 @@ import connectDB from "./config/db.js"
 
 import routerLike from './Routes/Like.Route.js'
 import routerCommentaire from './Routes/Commentaire.Route.js'
+import routerTweet from './Routes/Tweet.Route.js'
+import routerMedia from './Routes/Media.Route.js'
 
 const app = express();
 
@@ -20,5 +22,7 @@ connectDB(ENV.mongo)
 
 app.use("/api/like", routerLike);
 app.use("/api/commentaire", routerCommentaire);
+app.use("/api/tweet", routerTweet);
+app.use("/api/media", routerMedia);
 
 export default app ;

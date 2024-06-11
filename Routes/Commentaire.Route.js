@@ -2,7 +2,7 @@
 import express from 'express';
 import { addCommentaire, getAllCommentaires, getCommentaireById, updateCommentaire, deleteCommentaire } from '../Controllers/Commentaire.Controller.js';
 
-import { verifieToken } from '../auth.js';
+import { verifieToken } from '../Utils/Auth.js';
 
 
 const router = express.Router();

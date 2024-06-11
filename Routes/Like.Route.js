@@ -1,7 +1,7 @@
 // like.routes.js
 import express from 'express';
 import { createLike, likeTweet, unlikeTweet, updateLike } from '../Controllers/Like.Controller.js';
-import { verifieToken } from '../auth.js';
+import { verifieToken } from '../Utils/Auth.js';
 
 const router = express.Router();
 
