@@ -6,6 +6,7 @@ import connectDB from "./config/db.js"
 
 
 import routerLike from './Routes/Like.Route.js'
+import routerCommentaire from './Routes/Commentaire.Route.js'
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(cors());
 connectDB(ENV.mongo)
 
 app.use("/api/like", routerLike);
+app.use("/api/commentaire", routerCommentaire);
 
 export default app ;
