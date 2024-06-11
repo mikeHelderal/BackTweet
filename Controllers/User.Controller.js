@@ -23,14 +23,18 @@ const signup = async (req, res, next) => {
 
 const signIn = async (req, res, next) => {
     try {
+
+        console.log("test1 => ", req.body);
         const user = await userModel.findOne({email: req.body.email});
+
         const pswBdd = await  bcrypt.compare(req.body.password, user.password);
-        const token = jwt.sign({id: user._id}, env.token, {expiresIn: "24h"});
         const {password, ...other} = user._doc;
+
+
         if(user !== null  && pswBdd ){
              //envoi le jeton (token) JWT sous forme de cookie HTTPOnly
-            res.cookie("access_token", token, { httpOnly: true,  }).status(200).json(other);
-                res.status(200).json("connexion réussie");  
+            const token = jwt.sign({id: user._id}, env.token, {expiresIn: "24h"});
+            res.cookie("access_token", token, { httpOnly: true,  }).status(200).json(other);  
                 res.end();                  
         }    
     } catch (error) {

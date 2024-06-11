@@ -7,18 +7,29 @@ export const createTweet = async (req, res) => {
   try {
     const { id_user, contenu } = req.body;
 
+
     if (!id_user || !contenu) {
+      console.log("dans if");
       return res.status(400).json({ message: 'User ID and content are required' });
     }
 
-    const tweet = new Tweet({ id_user, contenu });
-    await tweet.save();
+   // const tweet = new Tweet({ id_user, contenu });
+    //await tweet.save();
+    const tweet = await Tweet.create({ id_user, contenu });
+    console.log("après create ");
 
+
+    io.emit("newTweet", tweet);
+
+    console.log("avant res statut ");
     res.status(201).json(tweet);
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 // Obtenir tous les tweets
 export const getTweets = async (req, res) => {
@@ -57,6 +68,8 @@ export const updateTweet = async (req, res) => {
     if (!tweet) {
       return res.status(404).json({ message: 'Tweet not found' });
     }
+
+    io.emit("updateTweet", tweet);
 
     res.status(200).json(tweet);
   } catch (error) {

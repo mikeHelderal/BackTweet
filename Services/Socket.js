@@ -8,7 +8,7 @@ import app from '../App.js'
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: '*',
+        origin: '*' ,
     }, 
 });
 
