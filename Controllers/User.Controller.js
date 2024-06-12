@@ -24,7 +24,6 @@ const signup = async (req, res, next) => {
 const signIn = async (req, res, next) => {
     try {
 
-        console.log("test1 => ", req.body);
         const user = await userModel.findOne({email: req.body.email});
 
         const pswBdd = await  bcrypt.compare(req.body.password, user.password);
@@ -34,6 +33,8 @@ const signIn = async (req, res, next) => {
         if(user !== null  && pswBdd ){
              //envoi le jeton (token) JWT sous forme de cookie HTTPOnly
             const token = jwt.sign({id: user._id}, env.token, {expiresIn: "24h"});
+            console.log("token => ", token, "id_user => ", user._id);
+
             res.cookie("access_token", token, { httpOnly: true,  }).status(200).json(other);  
                 res.end();                  
         }    
